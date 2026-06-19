@@ -16,14 +16,14 @@ Word stores these embedded objects under:
 word/embeddings/
 ```
 
-inside the `.docx` archive.
+inside the `.docx` archive (Actually .docx is a zipped file).
 
 In some situations:
 
 - Double-clicking the embedded PDF does nothing.
 - Word returns an OLE error.
 - Adobe Reader cannot open the embedded object.
-- Renaming `oleObject1.bin` to `.pdf` does not work.
+- Openning `.docx` as a zip archive, extracting `.bin` object file, renaming `oleObject1.bin` to `.pdf` does not work.
 
 However, the original PDF data is often still present inside the OLE container.
 
@@ -138,23 +138,3 @@ The extracted stream is then written back as a valid `.pdf` file.
 - This tool only extracts PDF streams that are present inside OLE embedded objects.
 - If the embedded PDF itself is corrupted, extraction cannot repair it.
 - Non-PDF OLE objects (Excel, PowerPoint, ZIP, etc.) are ignored.
-
-## Why This Exists
-
-After receiving a Word document containing embedded PDFs, Word detected the objects but failed to open them.
-
-Renaming:
-
-```text
-oleObject1.bin → oleObject1.pdf
-```
-
-did not work.
-
-Extracting the PDF stream directly from the OLE binary container solved the issue.
-
-Hopefully this utility saves someone else from the same frustration.
-
-## License
-
-MIT License
